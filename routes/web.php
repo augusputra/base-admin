@@ -23,6 +23,18 @@ Route::group([
     Route::get('/', 'DashboardController@index')->name('dashboard'); 
 
     Route::group([
+        'prefix' => 'roles'
+    ], function($router){
+        Route::get('/', 'RolesController@index')->name('roles');
+        Route::get('/form', 'RolesController@form')->name('roles.form');
+        Route::post('/create', 'RolesController@create')->name('roles.create');
+        Route::get('/form/{param}', 'RolesController@form')->name('roles.form_update');
+        Route::post('/update/{param}', 'RolesController@update')->name('roles.update');
+        Route::get('/detail/{param}', 'RolesController@detail')->name('roles.detail');
+        Route::get('/delete/{param}', 'RolesController@delete')->name('roles.delete');
+    });
+
+    Route::group([
         'prefix' => 'users'
     ], function($router){
         Route::get('/', 'UsersController@index')->name('users');

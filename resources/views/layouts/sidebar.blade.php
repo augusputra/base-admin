@@ -20,23 +20,23 @@
                 
                 @endcan
 
+                @canany(['view-role-list', 'create-role', 'update-role', 'delete-role'])
+
+                    <li>
+                        <a href="{{route('roles')}}" class="waves-effect font-size-15">
+                            <i class="ti-lock"></i>
+                            <span>Roles</span>
+                        </a>
+                    </li>
+
+                @endcan
+
                 @canany(['view-user-list', 'create-user', 'update-user', 'delete-user'])
 
                     <li>
                         <a href="{{route('users')}}" class="waves-effect font-size-15">
                             <i class="ti-user"></i>
                             <span>Users</span>
-                        </a>
-                    </li>
-
-                @endcan
-
-                @canany(['view-role-list', 'create-role', 'update-role', 'delete-role'])
-
-                    <li>
-                        <a href="{{route('users')}}" class="waves-effect font-size-15">
-                            <i class="ti-user"></i>
-                            <span>Roles</span>
                         </a>
                     </li>
 

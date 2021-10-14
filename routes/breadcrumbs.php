@@ -22,3 +22,13 @@ Breadcrumbs::for('users_form', function (BreadcrumbTrail $trail) {
     $trail->parent('users');
     $trail->push('Users Form', route('users.form'));
 });
+
+// Roles
+Breadcrumbs::for('roles', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Roles', route('roles'));
+});
+Breadcrumbs::for('roles_form', function (BreadcrumbTrail $trail) {
+    $trail->parent('roles');
+    $trail->push('Roles Form', route('roles.form'));
+});
