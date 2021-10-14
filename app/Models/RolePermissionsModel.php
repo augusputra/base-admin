@@ -28,4 +28,8 @@ class RolePermissionsModel extends Model
     protected $casts = [
         'id' => 'varchar',
     ];
+
+    function permission(){
+        return $this->belongsTo(PermissionsModel::class, 'permission_id', 'id');
+    }
 }

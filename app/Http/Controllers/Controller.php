@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use App\Models\CategoriesModel;
-use App\Models\ProvincesModel;
-use App\Models\RegenciesModel;
-use App\Models\DistrictsModel;
+use App\Models\RolesModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -26,6 +24,15 @@ class Controller extends BaseController
             return $error;
         } else {
             return null;
+        }
+    }
+    
+    public function permissionCheck($permission)
+    {        
+        if(Auth::user()->can($permission)){
+            return;
+        }else{
+            abort(403);
         }
     }
 
@@ -98,62 +105,11 @@ class Controller extends BaseController
         return $upload_location.'/'.$file_name;
     }
 
-    public function getCategory($id = 0, $is_all = false){
+    public function getRole($id = 0, $is_all = false){
         if ($is_all) {
-            $data = CategoriesModel::all();
+            $data = RolesModel::all();
         } else {
-            $data = CategoriesModel::findByField('id', $id);
-        }
-
-        $response = array();
-        foreach ($data as $key => $value) {
-            $response[] = array(
-                'id' => $value->id,
-                'text' => $value->name,
-            );
-        } 
-        return $response;
-    }
-
-    public function getProvince($id = 0, $is_all = false){
-        if ($is_all) {
-            $data = ProvincesModel::all();
-        } else {
-            $data = ProvincesModel::findByField('id', $id);
-        }
-
-        $response = array();
-        foreach ($data as $key => $value) {
-            $response[] = array(
-                'id' => $value->id,
-                'text' => $value->name,
-            );
-        } 
-        return $response;
-    }
-
-    public function getCity($province_id = 0){
-        if($province_id != 0){
-            $data = RegenciesModel::where('province_id', $province_id)->get();
-        }else{
-            $data = RegenciesModel::all();
-        }
-
-        $response = array();
-        foreach ($data as $key => $value) {
-            $response[] = array(
-                'id' => $value->id,
-                'text' => $value->name,
-            );
-        } 
-        return $response;
-    }
-
-    public function getDistrict($regency_id = 0){
-        if($regency_id != 0){
-            $data = DistrictsModel::where('regency_id', $regency_id)->get();
-        }else{
-            $data = DistrictsModel::all();
+            $data = RolesModel::where('id', $id)->get();
         }
 
         $response = array();

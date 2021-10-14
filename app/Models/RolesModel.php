@@ -30,4 +30,8 @@ class RolesModel extends Model
     protected $casts = [
         'id' => 'varchar',
     ];
+    
+    function role_permissions(){
+        return $this->hasMany(RolePermissionsModel::class, 'role_id', 'id');
+    }
 }

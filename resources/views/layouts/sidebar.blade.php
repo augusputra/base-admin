@@ -8,64 +8,39 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li>
-                    <a href="{{route('admin.dashboard')}}" class="waves-effect font-size-15">
+                    <a href="{{route('dashboard')}}" class="waves-effect font-size-15">
                         <i class="ti-home"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="menu-title">Master Data</li>
+                @canany(['view-user-list', 'view-role-list'])
 
-                <li>
-                    <a href="{{route('admin.categories')}}" class="waves-effect font-size-15">
-                        <i class="ti-view-grid"></i>
-                        <span>Categories</span>
-                    </a>
-                </li>
+                    <li class="menu-title">User Management</li>
+                
+                @endcan
 
-                <li>
-                    <a href="{{route('admin.services')}}" class="waves-effect font-size-15">
-                        <i class="ti-layers"></i>
-                        <span>Services</span>
-                    </a>
-                </li>
+                @canany(['view-user-list', 'create-user', 'update-user', 'delete-user'])
 
-                <li>
-                    <a href="{{route('admin.blogs')}}" class="waves-effect font-size-15">
-                        <i class="ti-write"></i>
-                        <span>Blogs</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{route('users')}}" class="waves-effect font-size-15">
+                            <i class="ti-user"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="{{route('admin.banners')}}" class="waves-effect font-size-15">
-                        <i class="ti-layout-slider"></i>
-                        <span>Banners</span>
-                    </a>
-                </li>
+                @endcan
 
-                <li class="menu-title">User Managemnt</li>
+                @canany(['view-role-list', 'create-role', 'update-role', 'delete-role'])
 
-                <li>
-                    <a href="{{route('admin.users')}}" class="waves-effect font-size-15">
-                        <i class="ti-user"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{route('users')}}" class="waves-effect font-size-15">
+                            <i class="ti-user"></i>
+                            <span>Roles</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="{{route('admin.creativers')}}" class="waves-effect font-size-15">
-                        <i class="ti-briefcase"></i>
-                        <span>Creativers</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{route('admin.banners')}}" class="waves-effect font-size-15">
-                        <i class="ti-view-list"></i>
-                        <span>Level</span>
-                    </a>
-                </li>
+                @endcan
 
             </ul>
         </div>

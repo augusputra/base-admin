@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('layouts.master')
 
 @section('title') {{$page_title}} @endsection
 
@@ -37,18 +37,25 @@
                             </div>
                         </div><!-- /btn-group -->
                         <button type="button" data-toggle="modal" data-target="#modal-filter" class="btn btn-warning">Filter</button>
+                        
+                        @can('create-user')
+                            <a href="{{route('users.form')}}" class="btn btn-primary dropdown-toggle waves-effect waves-light">
+                                New
+                            </a>
+                        @endcan
+
                     </div>
 
                 </div>
 
-                    @include('admin.layouts.table', ['header' => $table_header])
+                    @include('layouts.table', ['header' => $table_header])
 
                 </div>
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
 
-    @include('admin.layouts.filter', ['filter' => json_decode($setFilter, true)])
+    @include('layouts.filter', ['filter' => json_decode($setFilter, true)])
 
 @endsection
 
@@ -77,7 +84,7 @@
                     }
                 },
                 ajax: {
-                    url: "{{ route('admin.users') }}",
+                    url: "{{ route('users') }}",
                     dataType: "json",
                     type: "GET",
                     data: function ( d ) {
@@ -96,10 +103,10 @@
                 },
                 columns: [
                     {data : 'rownum'},
-                    {data : 'name'},
-                    {data : 'phone'},
+                    {data : 'first_name'},
+                    {data : 'last_name'},
                     {data : 'email'},
-                    {data : 'status'},
+                    {data : 'role.name'},
                     {data : 'created_at'},
                     {data : 'action'},
                 ],

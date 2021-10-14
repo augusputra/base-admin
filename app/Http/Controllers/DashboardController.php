@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -12,6 +13,6 @@ class DashboardController extends Controller
         $page_description = 'Summary for all activity';
         $sess = Session::get('auth');
 
-        return view('admin.pages.dashboard.index', compact('page_title', 'page_description'));
+        return view('pages.dashboard.index', compact('page_title', 'page_description'));
     }
 }
