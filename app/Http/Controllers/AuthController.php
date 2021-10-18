@@ -27,7 +27,8 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             $errors = $this->parseValidator($validator);
-            return $this->set_response(false,'Failed create new record because '.$errors);
+            Session::put('flash_message','Failed create new record because '.$errors);
+            return redirect()->route('login');
         }
         
         $data = $validator->validated();

@@ -121,7 +121,8 @@ class UsersController extends Controller
     
             if ($validator->fails()) {
                 $errors = $this->parseValidator($validator);
-                return $this->set_response(false,'Failed create new record because '.$errors);
+                Session::put('flash_message','Failed create new record because '.$errors);
+                return redirect()->route('users.form');
             }
             
             $data = $validator->validated();
@@ -154,7 +155,8 @@ class UsersController extends Controller
     
             if ($validator->fails()) {
                 $errors = $this->parseValidator($validator);
-                return $this->set_response(false,'Failed create new record because '.$errors);
+                Session::put('flash_message','Failed create new record because '.$errors);
+                return redirect()->route('users.form', $param);
             }
 
             $data = $validator->validated();
@@ -175,7 +177,8 @@ class UsersController extends Controller
         
                 if ($validator->fails()) {
                     $errors = $this->parseValidator($validator);
-                    return $this->set_response(false,'Failed create new record because '.$errors);
+                    Session::put('flash_message','Failed create new record because '.$errors);
+                    return redirect()->route('users.form', $param);
                 }
 
                 $data += $validator->validated();
