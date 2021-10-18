@@ -27,16 +27,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        if(Auth::user()){
-            $permissions = PermissionsModel::all()->pluck('name');
-            foreach ($permissions as $permission) {
-                Gate::define($permission, function ($user) use ($permission) {
-                    $user_permissions = collect($user->role->role_permissions->pluck('permission.name'));
-                    if (in_array($permission, $user_permissions->toArray())) {
-                        return true;
-                    }
-                });
-            }
+        $permissions = PermissionsModel::all()->pluck('name');
+        foreach ($permissions as $permission) {
+            Gate::define($permission, function ($user) use ($permission) {
+                $user_permissions = collect($user->role->role_permissions->pluck('permission.name'));
+                if (in_array($permission, $user_permissions->toArray())) {
+                    return true;
+                }
+            });
         }
     }
 }
