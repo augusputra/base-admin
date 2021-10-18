@@ -74,7 +74,7 @@ class RolesController extends Controller
         $sess = Auth::user();
         $permissions = PermissionsModel::all();
         $groups = [];
-        $role_permission = [];
+        $role_permissions = [];
         foreach ($permissions as $data_p) {
             if (in_array($data_p->group, $groups)) {
                 continue;
@@ -123,7 +123,7 @@ class RolesController extends Controller
             $result = RolesModel::create($data);
 
             foreach ($request->permission_ids as $key => $row) {
-                $bulk[] = ['role_id'=>$data->id,'permission_id'=>$row,'created_at' => date('Y-m-d H:i:s'),'updated_at' => date('Y-m-d H:i:s')];
+                $bulk[] = ['role_id'=>$result->id,'permission_id'=>$row,'created_at' => date('Y-m-d H:i:s'),'updated_at' => date('Y-m-d H:i:s')];
             }
             RolePermissionsModel::insert($bulk);
 

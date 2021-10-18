@@ -126,6 +126,8 @@ class UsersController extends Controller
             
             $data = $validator->validated();
 
+            $data['password'] = bcrypt($data['password']);
+
             $result = UsersModel::create($data);
 
             DB::commit();
@@ -177,6 +179,8 @@ class UsersController extends Controller
                 }
 
                 $data += $validator->validated();
+
+                $data['password'] = bcrypt($data['password']);
             }
 
             $detail = UsersModel::find($param);

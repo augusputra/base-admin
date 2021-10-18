@@ -130,7 +130,7 @@
                                                         </div>
                                                         <div class="col-6 text-right">
                                                             <input type="checkbox" name="permission_ids[]" value="{{ $row_p->id }}" 
-                                                            {{ in_array($row_p->id, $role_permissions->toArray()) ? 'Checked' : ''}} onClick="{{ $type == 'Detail' ? 'return false' : null }}">
+                                                            {{ count($role_permissions) > 0 ? in_array($row_p->id, $role_permissions->toArray()) ? 'Checked' : '' : null}} onClick="{{ $type == 'Detail' ? 'return false' : null }}">
                                                         </div>
                                                     </div>
 
